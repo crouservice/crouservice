@@ -11,7 +11,7 @@ import * as leaf from 'leaflet';
 })
 export class MapComponent implements OnInit {
   ngOnInit() {
-    const map = leaf.map('map');
+    const map = leaf.map('map').setView([48.01850, 0.160995], 15);
     map.on('zoomend', this.updateLocation);
     map.on('moveend', this.updateLocation);
     map.on('overlayadd', this.updateFilter);
