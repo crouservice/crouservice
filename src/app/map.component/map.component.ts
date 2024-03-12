@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 
 import * as leaf from 'leaflet';
+import {MapModule} from "../map.module/map.module";
 
 @Component({
   selector: 'app-map',
-  standalone: true,
-  imports: [],
+  standalone: false,
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })
