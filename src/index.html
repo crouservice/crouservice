@@ -2,29 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Crouservice</title>
+  <title>CousFront</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
   <app-root></app-root>
-  <script>
-    function search() {
-       var mots_cles = document.querySelector(".searchTerm").value.toLowerCase().split(" ");
-       var donnees = ["residence", "résidence", "logement", "restaurant", "appartement"];
-       var resultat = [];
-       
-       for(var i = 0; i < mots_cles.length; i++) {
-          for(var j = 0; j < donnees.length; j++) {
-             if(donnees[j].toLowerCase().indexOf(mots_cles[i]) > -1) {
-                resultat.push(donnees[j]);
-             }
-          }
-       }
-       // afficher les résultats de la recherche
-       console.log(resultat);
-    }
- </script>
 </body>
 </html>
