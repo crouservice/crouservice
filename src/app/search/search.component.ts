@@ -12,6 +12,7 @@ export class SearchComponent {
 
   ngOnInit(): void {
     this.resultat = [];
+    console.log('Oui');
   }
 
   search() {
@@ -32,5 +33,7 @@ export class SearchComponent {
           }
        }
     }
- }
+    // afficher les résultats de la recherche
+    console.log('Résultat de la recherche : ', this.resultat);
+  }
 }
