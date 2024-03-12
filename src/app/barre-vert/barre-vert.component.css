@@ -1,0 +1,23 @@
+.barre {
+  position: fixed;
+	width: 18%;
+	height: 99.6%;
+  margin: 0px;
+  padding-right: 0px;
+  top: 0px;
+  left: 0px;
+  background-color: #820E06;
+  border: 2px solid #0A0A04;
+  border-radius: 0 5px 5px 0;
+}
+
+.logo_container {
+  text-align: center;
+}
+
+.logo {
+  width: 60%;
+  border-bottom: solid;
+  border-color: #0A0A04;
+}
+
