@@ -1,0 +1,21 @@
+<div>
+    <div>
+        <h2>Liste</h2>
+    </div>
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th> Nom</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let elem of Liste; index as i">
+                    <td>{{elem.title}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
