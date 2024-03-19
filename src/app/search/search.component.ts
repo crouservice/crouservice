@@ -12,7 +12,6 @@ export class SearchComponent {
 
   ngOnInit(): void {
     this.resultat = [];
-    console.log('Oui');
   }
 
   search() {

@@ -98,3 +98,13 @@
 .more:hover .more-menu {
   display: inline-block;
 }
+
+.item {
+  padding: 5px;
+  background-color: aqua;
+}
+
+.item img {
+  width: 100%;
+  height: auto;
+}
