@@ -10,6 +10,8 @@
   background-color: #820E06;
   border: 2px solid #0A0A04;
   border-radius: 0 5px 5px 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .logo_container {
@@ -99,12 +101,7 @@
   display: inline-block;
 }
 
-.item {
-  padding: 5px;
-  background-color: aqua;
-}
-
-.item img {
-  width: 100%;
-  height: auto;
+#placeItems {
+  overflow: scroll;
+  height: 100%;
 }

@@ -1,24 +1,26 @@
-import { NgFor } from '@angular/common';
+import { ApiService } from '../services/api.service';
 import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-barre-vert',
-  standalone: true,
-  imports: [NgFor],
+  
+  //imports: [],
   templateUrl: './barre-vert.component.html',
   styleUrl: './barre-vert.component.css'
 })
 export class BarreVertComponent implements OnInit {
   //Liste:any=[{"title":"test"}, {"title":"test1"}];
 
-  constructor(private renderer: Renderer2, private el: ElementRef) {}
+  constructor(private renderer: Renderer2, private el: ElementRef, private service: ApiService) {}
 
   ngOnInit(): void {
     console.log("Hello")
+    setTimeout(() => this.creationItems(this.service), 10)
   }
 
-  creationItems(): void {
-    const items = [
+  creationItems(service: ApiService): void {
+    console.log("Test fonction");
+    /*const items = [
       { id: 1, name: "Item 1", imageUrl: "https://www.google.com/search?client=ubuntu&hs=BUJ&sca_esv=5d2091cbd4f7042a&channel=fs&sxsrf=ACQVn08OKzu4zyrbaRBiOeLaVYkQOf3bTA:1710855676028&q=image&tbm=isch&source=lnms&sa=X&ved=2ahUKEwjmmtOGuoCFAxXqUaQEHcW5AKQQ0pQJegQIExAB&biw=1848&bih=968&dpr=1#imgrc=0E5dDA82VanW3M"},
       { id: 2, name: "Item 2", imageUrl: "https://www.google.com/search?client=ubuntu&hs=BUJ&sca_esv=5d2091cbd4f7042a&channel=fs&sxsrf=ACQVn08OKzu4zyrbaRBiOeLaVYkQOf3bTA:1710855676028&q=image&tbm=isch&source=lnms&sa=X&ved=2ahUKEwjmmtOGuoCFAxXqUaQEHcW5AKQQ0pQJegQIExAB&biw=1848&bih=968&dpr=1#imgrc=0E5dDA82VanW3M"},
       { id: 3, name: "Item 3", imageUrl: "https://www.google.com/search?client=ubuntu&hs=BUJ&sca_esv=5d2091cbd4f7042a&channel=fs&sxsrf=ACQVn08OKzu4zyrbaRBiOeLaVYkQOf3bTA:1710855676028&q=image&tbm=isch&source=lnms&sa=X&ved=2ahUKEwjmmtOGuoCFAxXqUaQEHcW5AKQQ0pQJegQIExAB&biw=1848&bih=968&dpr=1#imgrc=0E5dDA82VanW3M"},
@@ -43,7 +45,18 @@ export class BarreVertComponent implements OnInit {
       div.appendChild(img);
       div.appendChild(text);
       this.renderer.appendChild(this.el.nativeElement, div);
-    }
+    }*/
+    var place = document.getElementById("placeItems");
+    service.creationItems().subscribe((elements: HTMLElement[]) => {
+      for (const el of elements) {
+        /*this.renderer.appendChild(this.el.nativeElement, el);*/
+        console.log(el)
+        if (el != undefined) {
+          place?.appendChild(el);
+        }
+      }
+    })
+    
   }
 
   acces_pmr(): void {}
