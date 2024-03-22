@@ -7,7 +7,7 @@ import { Observable, map } from 'rxjs';
 })
 export class ApiService {
 
-  resultat: string[] = ["Restaurant","PMR"];
+  resultat: string[] = [""];
 
   REST_API_Res : string ="http://127.0.0.1:3080/restaurant"
   REST_API_Log : string ="http://127.0.0.1:3080/logement"
@@ -34,6 +34,27 @@ export class ApiService {
     // Supprime tous les items de la barre verticale
     var place = document.getElementById("placeItems");
     place?.remove();
+
+    /*this.REST_API_Res = "http://127.0.0.1:3080/restaurant";
+    this.REST_API_Log = "http://127.0.0.1:3080/logement";
+
+    this.creationRestaurants().subscribe((elements: HTMLElement[]) => {
+      for (const el of elements) {
+        console.log(el)
+        if (el != undefined) {
+          place?.appendChild(el);
+        }
+      }
+    })
+
+    this.creationLogements().subscribe((elements: HTMLElement[]) => {
+      for (const el of elements) {
+        console.log(el)
+        if (el != undefined) {
+          place?.appendChild(el);
+        }
+      }
+    })*/
 
     // afficher les résultats de la recherche
     console.log('Résultat de la recherche : ', this.resultat);
