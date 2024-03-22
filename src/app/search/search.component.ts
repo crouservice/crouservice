@@ -10,12 +10,8 @@ import { ApiService } from '../services/api.service';
 })
 export class SearchComponent {
   constructor(private apiService: ApiService){};
-  ngOnInit(): void{
-    this.apiService.GetInfo().subscribe(res =>{
-      console.log(res)
-    });
-  }
   search2(): void {
-    this.apiService.search((<HTMLInputElement>document.querySelector(".searchTerm")).value.toLowerCase().split(" "));
+    //this.apiService.search((<HTMLInputElement>document.querySelector(".searchTerm")).value.toLowerCase().split(" "));
+    this.apiService.search((<HTMLInputElement>document.querySelector(".searchTerm")).value.split(" "));
   }
 }

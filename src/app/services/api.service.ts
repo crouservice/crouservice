@@ -7,13 +7,10 @@ import { Observable, map } from 'rxjs';
 })
 export class ApiService {
 
-  resultat: string[] = [];
+  resultat: string[] = ["Restaurant","PMR"];
 
-  ngOnInit(): void {
-    this.resultat = [];
-  }
-
-  REST_API : string ="http://127.0.0.1:3080/restaurant"
+  REST_API_Res : string ="http://127.0.0.1:3080/restaurant"
+  REST_API_Log : string ="http://127.0.0.1:3080/logement"
   constructor(private httpCLient : HttpClient) { }
   
   search(searchTerms: string[]) {
@@ -33,19 +30,18 @@ export class ApiService {
           }
        }
     }
+
+    // Supprime tous les items de la barre verticale
+    var place = document.getElementById("placeItems");
+    place?.remove();
+
     // afficher les résultats de la recherche
     console.log('Résultat de la recherche : ', this.resultat);
   }
 
-  creationItems(): Observable<HTMLElement[]> {
-    /*const items :any= [
-      { id: 1, name: "Item 1", imageUrl: "assets/search.png"},
-      { id: 2, name: "Item 2", imageUrl: "assets/search.png"},
-      { id: 3, name: "Item 3", imageUrl: "assets/search.png"},
-      { id: 4, name: "Item 4", imageUrl: "assets/search.png"},
-    ];*/
-
-    return this.httpCLient.get(`${this.REST_API}`).pipe(map((data: Object) => {
+  creationRestaurants(): Observable<HTMLElement[]> {
+    this.REST_API_Res = this.REST_API_Res + '/{"trie":' + JSON.stringify(this.resultat) + '}';
+    return this.httpCLient.get(`${this.REST_API_Res}`).pipe(map((data: Object) => {
       let items:any[] = data as any[]
       let elements:HTMLElement[] = Array(items.length);
       for(let i = 0; i < items.length; i++) {
@@ -57,13 +53,18 @@ export class ApiService {
 
         const titre = document.createElement("p");
         titre.innerText = item.title;
-        titre.style.cssText = `font-weight: bold;`
+        titre.style.cssText = `font-weight: bold; color: #E3E3E0;`
+
+        const lieu = document.createElement("p");
+        lieu.innerText = item.zone;
+        lieu.style.cssText = `font-weight: italic; color: #E3E3E0;`
 
         const description = document.createElement("p");
         description.innerText = item.infos;
-        description.style.cssText = `font-size: smaller;`
+        description.style.cssText = `font-size: smaller; color: #E3E3E0;`
 
         div.appendChild(titre);
+        div.appendChild(lieu);
         div.appendChild(description);
         elements.push(div);
       }
@@ -71,9 +72,53 @@ export class ApiService {
     }))
   }
 
-  
-  GetInfo(){
-    console.log(this.httpCLient.get(`${this.REST_API}`));
-    return this.httpCLient.get(`${this.REST_API}`);
+  creationLogements(): Observable<HTMLElement[]> {
+    this.REST_API_Log = this.REST_API_Log + '/{"trie":' + JSON.stringify(this.resultat) + '}';
+    console.log(this.REST_API_Log);
+    return this.httpCLient.get(`${this.REST_API_Log}`).pipe(map((data: Object) => {
+      let items:any[] = data as any[]
+      let elements:HTMLElement[] = Array(items.length);
+      for(let i = 0; i < items.length; i++) {
+        const item = items[i];
+
+        const div = document.createElement("div");
+        div.className = 'item';
+        div.style.cssText = `padding: 5px; border-bottom: 1px solid black;`
+
+        const titre = document.createElement("p");
+        titre.innerText = item.title;
+        titre.style.cssText = `font-weight: bold; color: #E3E3E0;`
+
+        const lieu = document.createElement("p");
+        lieu.innerText = item.zone;
+        lieu.style.cssText = `font-weight: italic; color: #E3E3E0;`
+
+        const description = document.createElement("p");
+        description.innerText = item.infos;
+        description.style.cssText = `font-size: smaller; color: #E3E3E0;`
+
+        const adresse = document.createElement("p");
+        adresse.innerText = item.address;
+        adresse.style.cssText = `font-size: smaller; color: #E3E3E0;`
+        
+        const mail = document.createElement("p");
+        mail.innerText = item.mail;
+        mail.style.cssText = `font-size: smaller; color: #E3E3E0;`
+
+        const phone = document.createElement("p");
+        phone.innerText = item.phone;
+        phone.style.cssText = `font-size: smaller; color: #E3E3E0;`
+
+        div.appendChild(titre);
+        div.appendChild(lieu);
+        div.appendChild(description);
+        div.appendChild(adresse);
+        div.appendChild(mail);
+        div.appendChild(phone);
+        elements.push(div);
+      }
+      return elements;
+    }))
   }
+
 }
