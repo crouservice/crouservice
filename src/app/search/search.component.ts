@@ -1,39 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-search',
-  standalone: true,
-  imports: [],
+  
+  //imports: [],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css'
 })
 export class SearchComponent {
-  resultat: string[] = [];
-
-  ngOnInit(): void {
-    this.resultat = [];
-    console.log('Oui');
-  }
-
-  search() {
-    var mots_cles = (<HTMLInputElement>document.querySelector(".searchTerm")).value.toLowerCase().split(" ");
-    var donnees = [
-      "residence", 
-      "résidence", 
-      "logement", 
-      "restaurant", 
-      "appartement"
-    ];
-    
-    // récupère les mots qui sont inclus dans donnees
-    for(var i = 0; i < mots_cles.length; i++) {
-       for(var j = 0; j < donnees.length; j++) {
-          if(donnees.indexOf(mots_cles[i]) > -1 && this.resultat.indexOf(mots_cles[i]) == -1) {
-             this.resultat.push(mots_cles[i]);
-          }
-       }
-    }
-    // afficher les résultats de la recherche
-    console.log('Résultat de la recherche : ', this.resultat);
+  constructor(private apiService: ApiService){};
+  search2(): void {
+    //this.apiService.search((<HTMLInputElement>document.querySelector(".searchTerm")).value.toLowerCase().split(" "));
+    this.apiService.search((<HTMLInputElement>document.querySelector(".searchTerm")).value.split(" "));
   }
 }

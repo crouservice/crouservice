@@ -10,6 +10,8 @@
   background-color: #820E06;
   border: 2px solid #0A0A04;
   border-radius: 0 5px 5px 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .logo_container {
@@ -55,7 +57,7 @@
   font-size: 20px;
   border: none;
   outline: none;
-  color: black;
+  color: #E3E3E0;
   background-color: inherit;
   font-family: Arial;
   margin: 10px;
@@ -71,7 +73,7 @@
 .more-menu {
   display: none;
   position: absolute;
-  background-color: gray;
+  background-color: #848484;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -86,7 +88,7 @@
 }
 
 .navbar a:hover, .more:hover .btn {
-  background-color: black;
+  background-color: #EF5D4E;
   color: white;
 }
 
@@ -97,4 +99,9 @@
 
 .more:hover .more-menu {
   display: inline-block;
+}
+
+#placeItems {
+  overflow: scroll;
+  height: 100%;
 }
