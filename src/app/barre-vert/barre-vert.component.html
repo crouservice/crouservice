@@ -1,5 +1,8 @@
 <div class="barre">
-  <img class="logo" src="../../assets/logo-png.png"/>
+
+  <div class="logo_container">
+    <img class="logo" src="../../assets/logo.png"/>
+  </div>
 
   <div class="navbar" id="nav">
     <div class="more">
@@ -7,10 +10,68 @@
         <i class="fa fa-caret-down"></i>
       </button>
       <div class="more-menu">
+        <a id="titre_filtre">Logement</a>
         <fieldset>
           <div>
-            <input type="checkbox" id="filtre1" name="filtre1" checked />
-            <label for="filtre1">NomF1</label>
+            <input type="checkbox" id="Accessible_PMR" name="Accessible PMR" (click)="acces_pmr()" />
+            <label for="Accessible_PMR">Accessible PMR</label>
+          </div>
+
+          <div>
+            <input type="checkbox" id="Parking" name="Parking" (click)="parking()" />
+            <label for="Parking">Parking</label>
+          </div>
+
+          <div>
+            <input type="checkbox" id="Laverie" name="Laverie" (click)="laverie()" />
+            <label for="Laverie">Laverie</label>
+          </div>
+
+          <div>
+            <input type="checkbox" id="Cuisine_collective" name="Cuisine collective" (click)="cuisine_collec()" />
+            <label for="Cuisine_collective">Cuisine collective</label>
+          </div>
+
+          <div>
+            <input type="checkbox" id="Douche_individuelle" name="Douche individuelle" (click)="douche_indiv()" />
+            <label for="Douche_individuelle">Douche individuelle</label>
+          </div>
+
+          <div>
+            <input type="checkbox" id="Kitchenette_individuelle" name="Kitchenette individuelle" (click)="kitchenette_indiv()" />
+            <label for="Kitchenette_individuelle">Kitchenette individuelle</label>
+          </div>
+
+          <div>
+            <input type="checkbox" id="Internet_Wifi" name="Internet / Wifi" (click)="internet()" />
+            <label for="Internet_Wifi">Internet / Wifi</label>
+          </div>
+
+          <div>
+            <input type="checkbox" id="Garage_velos" name="Garage à vélos" (click)="garage_velos()" />
+            <label for="Garage à vélos">Garage à vélos</label>
+          </div>
+
+          <div>
+            <input type="checkbox" id="Surveillance_Sécurité" name="Surveillance / Sécurité" (click)="securite()" />
+            <label for="Surveillance_Sécurité">Surveillance / Sécurité</label>
+          </div>
+
+          <div>
+            <input type="checkbox" id="Restauration_sur_place" name="Restauration sur place" (click)="restauration_sur_place()" />
+            <label for="Restauration_sur_place">Restauration sur place</label>
+          </div>
+
+          <div>
+            <input type="checkbox" id="Salle_de_travail" name="Salle de travail" (click)="salle_de_travail()" />
+            <label for="Salle_de_travail">Salle de travail</label>
+          </div>
+        </fieldset>
+        <a id="titre_filtre">Restaurant</a>
+        <fieldset>
+          <div>
+            <input type="checkbox" id="filtre1" name="filtre1" />
+            <label for="filtre1">filtre1</label>
           </div>
 
           <div>
@@ -61,4 +122,7 @@
       </div>
     </div>
   </div>
+
+  <div id="placeItems"></div>
+
 </div>
