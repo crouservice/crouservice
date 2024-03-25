@@ -118,7 +118,7 @@ export class MapComponent implements OnInit {
         }
         (data as Logement[]).forEach((location: Logement) => {
           if (this.hebergementLayer.getLayers().length == 0 || !this.hebergementLayer.getLayers().map(layer => layer.getTooltip()?.getLatLng()).includes(new LatLng(location["geocalisation"]["lat"], location["geocalisation"]["lon"]))) {
-            console.log(location);
+            //console.log(location);
             leaf.marker([location.geocalisation.lat, location.geocalisation.lon], {icon: this.hebergementIcon})
               .addTo(this.hebergementLayer)
               .bindPopup(location.title);
@@ -139,6 +139,6 @@ export class MapComponent implements OnInit {
   }
 
   updateFilter() {
-    console.log("#TODO update filter")
+    //console.log("#TODO update filter")
   }
 }

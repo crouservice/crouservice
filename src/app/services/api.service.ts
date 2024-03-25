@@ -9,6 +9,8 @@ export class ApiService {
 
   resultat: string[] = [""];
 
+  tFiltres: string[] = [];
+
   REST_API_Res : string ="http://127.0.0.1:3080/restaurant"
   REST_API_Log : string ="http://127.0.0.1:3080/logement"
   REST_API_liste_Trie :string ="http://127.0.0.1:3080/trie"
@@ -24,7 +26,6 @@ export class ApiService {
   GetTrie(){
     this.httpCLient.get(`${this.REST_API_liste_Trie}`).subscribe(res =>{
       this.Liste=res;
-      //console.log("aa",this.Liste.trie )
     });
     return true
   }
@@ -32,7 +33,9 @@ export class ApiService {
   search(searchTerms: string[]) {
     this.resultat =[""];
     var donnees = this.Liste.trie
-    console.log(donnees)
+
+    this.resultat = this.resultat.concat(this.tFiltres);
+    
     // récupère les mots qui sont inclus dans donnees
     for(var i = 0; i < searchTerms.length; i++) {
        for(var j = 0; j < donnees.length; j++) {
@@ -60,7 +63,6 @@ export class ApiService {
 
     this.creationRestaurants().subscribe((elements: HTMLElement[]) => {
       for (const el of elements) {
-        //console.log(el)
         if (el != undefined) {
           place?.appendChild(el);
         }
@@ -69,7 +71,6 @@ export class ApiService {
 
     this.creationLogements().subscribe((elements: HTMLElement[]) => {
       for (const el of elements) {
-        //console.log(el)
         if (el != undefined) {
           place?.appendChild(el);
         }
@@ -82,11 +83,10 @@ export class ApiService {
 
   creationRestaurants(): Observable<HTMLElement[]> {
     this.REST_API_Res = this.REST_API_Res + '/{"trie":' + JSON.stringify(this.resultat) + '}';
-    //console.log(this.REST_API_Res);
     return this.httpCLient.get(`${this.REST_API_Res}`).pipe(map((data: Object) => {
       let items:any[] = data as any[]
       let elements:HTMLElement[] = Array(items.length);
-      console.log(items)
+      //console.log(items)
       for(let i = 0; i < items.length; i++) {
         const item = items[i];
 
@@ -164,4 +164,15 @@ export class ApiService {
     }))
   }
 
+  filtres(nomFiltre: string): void {
+    if (this.tFiltres.includes(nomFiltre) == true){
+      let index = this.tFiltres.indexOf(nomFiltre);
+      this.tFiltres.splice(index, 1);
+    }
+    else {
+      this.tFiltres.push(nomFiltre);
+    }
+    this.search([""]);
+    console.log(this.tFiltres);
+  }
 }

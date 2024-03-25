@@ -10,64 +10,64 @@
         <i class="fa fa-caret-down"></i>
       </button>
       <div class="more-menu">
-        <a id="titre_filtre">Logement</a>
+        <a id="titre_filtre">Filtres</a>
         <fieldset>
           <div>
-            <input type="checkbox" id="Accessible_PMR" name="Accessible PMR" (click)="acces_pmr()" />
+            <input type="checkbox" id="Accessible_PMR" name="Accessible PMR" (click)="filtres('pmr')" />
             <label for="Accessible_PMR">Accessible PMR</label>
           </div>
 
           <div>
-            <input type="checkbox" id="Parking" name="Parking" (click)="parking()" />
+            <input type="checkbox" id="Parking" name="Parking" (click)="filtres('parking')" />
             <label for="Parking">Parking</label>
           </div>
 
           <div>
-            <input type="checkbox" id="Laverie" name="Laverie" (click)="laverie()" />
+            <input type="checkbox" id="Laverie" name="Laverie" (click)="filtres('laverie')" />
             <label for="Laverie">Laverie</label>
           </div>
 
           <div>
-            <input type="checkbox" id="Cuisine_collective" name="Cuisine collective" (click)="cuisine_collec()" />
+            <input type="checkbox" id="Cuisine_collective" name="Cuisine collective" (click)="filtres('cuisine')" />
             <label for="Cuisine_collective">Cuisine collective</label>
           </div>
 
           <div>
-            <input type="checkbox" id="Douche_individuelle" name="Douche individuelle" (click)="douche_indiv()" />
+            <input type="checkbox" id="Douche_individuelle" name="Douche individuelle" (click)="filtres('douche')" />
             <label for="Douche_individuelle">Douche individuelle</label>
           </div>
 
           <div>
-            <input type="checkbox" id="Kitchenette_individuelle" name="Kitchenette individuelle" (click)="kitchenette_indiv()" />
+            <input type="checkbox" id="Kitchenette_individuelle" name="Kitchenette individuelle" (click)="filtres('kitchenette')" />
             <label for="Kitchenette_individuelle">Kitchenette individuelle</label>
           </div>
 
           <div>
-            <input type="checkbox" id="Internet_Wifi" name="Internet / Wifi" (click)="internet()" />
+            <input type="checkbox" id="Internet_Wifi" name="Internet / Wifi" (click)="filtres('internet')" />
             <label for="Internet_Wifi">Internet / Wifi</label>
           </div>
 
           <div>
-            <input type="checkbox" id="Garage_velos" name="Garage à vélos" (click)="garage_velos()" />
+            <input type="checkbox" id="Garage_velos" name="Garage à vélos" (click)="filtres('garage')" />
             <label for="Garage à vélos">Garage à vélos</label>
           </div>
 
           <div>
-            <input type="checkbox" id="Surveillance_Sécurité" name="Surveillance / Sécurité" (click)="securite()" />
+            <input type="checkbox" id="Surveillance_Sécurité" name="Surveillance / Sécurité" (click)="filtres('securite')" />
             <label for="Surveillance_Sécurité">Surveillance / Sécurité</label>
           </div>
 
           <div>
-            <input type="checkbox" id="Restauration_sur_place" name="Restauration sur place" (click)="restauration_sur_place()" />
+            <input type="checkbox" id="Restauration_sur_place" name="Restauration sur place" (click)="filtres('restauration')" />
             <label for="Restauration_sur_place">Restauration sur place</label>
           </div>
 
           <div>
-            <input type="checkbox" id="Salle_de_travail" name="Salle de travail" (click)="salle_de_travail()" />
+            <input type="checkbox" id="Salle_de_travail" name="Salle de travail" (click)="filtres('travail')" />
             <label for="Salle_de_travail">Salle de travail</label>
           </div>
         </fieldset>
-        <a id="titre_filtre">Restaurant</a>
+        <!--<a id="titre_filtre">Restaurant</a>
         <fieldset>
           <div>
             <input type="checkbox" id="filtre1" name="filtre1" />
@@ -118,7 +118,7 @@
             <input type="checkbox" id="filtre10" name="filtre10" />
             <label for="filtre10">NomF10</label>
           </div>
-        </fieldset>
+        </fieldset>-->
       </div>
     </div>
   </div>

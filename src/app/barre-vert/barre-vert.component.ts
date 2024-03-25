@@ -17,11 +17,14 @@ export class BarreVertComponent implements OnInit {
     setTimeout(() => this.creationLogements(this.service), 10)
   }
 
+  filtres(nomFiltre: string): void {
+    this.service.filtres(nomFiltre)
+  }
+
   creationRestaurants(service: ApiService): void {
     var place = document.getElementById("placeItems");
     service.creationRestaurants().subscribe((elements: HTMLElement[]) => {
       for (const el of elements) {
-        console.log(el)
         if (el != undefined) {
           place?.appendChild(el);
         }
@@ -33,23 +36,10 @@ export class BarreVertComponent implements OnInit {
     var place = document.getElementById("placeItems");
     service.creationLogements().subscribe((elements: HTMLElement[]) => {
       for (const el of elements) {
-        console.log(el)
         if (el != undefined) {
           place?.appendChild(el);
         }
       }
     })
   }
-
-  acces_pmr(): void {}
-  parking(): void {}
-  laverie(): void {}
-  cuisine_collec(): void {}
-  douche_indiv(): void {}
-  kitchenette_indiv(): void {}
-  internet(): void {}
-  garage_velos(): void {}
-  securite(): void {}
-  restauration_sur_place(): void {}
-  salle_de_travail(): void {}
 }
