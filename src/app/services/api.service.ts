@@ -9,18 +9,32 @@ export class ApiService {
 
   resultat: string[] = [""];
 
+  tFiltres: string[] = [];
+
   REST_API_Res : string ="http://127.0.0.1:3080/restaurant"
   REST_API_Log : string ="http://127.0.0.1:3080/logement"
-  constructor(private httpCLient : HttpClient) { }
+  REST_API_liste_Trie :string ="http://127.0.0.1:3080/trie"
   
+  constructor(private httpCLient : HttpClient) {
+    this.GetTrie()
+    
+   }
+  Liste:any =[{"trie":"test"}];
+
+  
+  
+  GetTrie(){
+    this.httpCLient.get(`${this.REST_API_liste_Trie}`).subscribe(res =>{
+      this.Liste=res;
+    });
+    return true
+  }
+
   search(searchTerms: string[]) {
-    var donnees = [
-      "residence", 
-      "résidence", 
-      "logement", 
-      "restaurant", 
-      "appartement"
-    ];
+    this.resultat =[""];
+    var donnees = this.Liste.trie
+
+    this.resultat = this.resultat.concat(this.tFiltres);
     
     // récupère les mots qui sont inclus dans donnees
     for(var i = 0; i < searchTerms.length; i++) {
@@ -33,14 +47,22 @@ export class ApiService {
 
     // Supprime tous les items de la barre verticale
     var place = document.getElementById("placeItems");
-    place?.remove();
+ 
+    if ( place) {
+        // Sélectionnez tous les éléments div enfants
+        var childDivs =  place.querySelectorAll("div");
 
-    /*this.REST_API_Res = "http://127.0.0.1:3080/restaurant";
+        // Parcourez chaque élément div enfant et supprimez-le
+        childDivs.forEach(function(child) {
+            child.remove();
+      });
+    }
+    
+    this.REST_API_Res = "http://127.0.0.1:3080/restaurant";
     this.REST_API_Log = "http://127.0.0.1:3080/logement";
 
     this.creationRestaurants().subscribe((elements: HTMLElement[]) => {
       for (const el of elements) {
-        console.log(el)
         if (el != undefined) {
           place?.appendChild(el);
         }
@@ -49,12 +71,11 @@ export class ApiService {
 
     this.creationLogements().subscribe((elements: HTMLElement[]) => {
       for (const el of elements) {
-        console.log(el)
         if (el != undefined) {
           place?.appendChild(el);
         }
       }
-    })*/
+    })
 
     // afficher les résultats de la recherche
     console.log('Résultat de la recherche : ', this.resultat);
@@ -65,6 +86,7 @@ export class ApiService {
     return this.httpCLient.get(`${this.REST_API_Res}`).pipe(map((data: Object) => {
       let items:any[] = data as any[]
       let elements:HTMLElement[] = Array(items.length);
+      //console.log(items)
       for(let i = 0; i < items.length; i++) {
         const item = items[i];
 
@@ -95,10 +117,10 @@ export class ApiService {
 
   creationLogements(): Observable<HTMLElement[]> {
     this.REST_API_Log = this.REST_API_Log + '/{"trie":' + JSON.stringify(this.resultat) + '}';
-    console.log(this.REST_API_Log);
     return this.httpCLient.get(`${this.REST_API_Log}`).pipe(map((data: Object) => {
       let items:any[] = data as any[]
       let elements:HTMLElement[] = Array(items.length);
+      
       for(let i = 0; i < items.length; i++) {
         const item = items[i];
 
@@ -142,4 +164,15 @@ export class ApiService {
     }))
   }
 
+  filtres(nomFiltre: string): void {
+    if (this.tFiltres.includes(nomFiltre) == true){
+      let index = this.tFiltres.indexOf(nomFiltre);
+      this.tFiltres.splice(index, 1);
+    }
+    else {
+      this.tFiltres.push(nomFiltre);
+    }
+    this.search([""]);
+    console.log(this.tFiltres);
+  }
 }
