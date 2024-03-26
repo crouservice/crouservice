@@ -78,7 +78,7 @@ export class ApiService {
     })
 
     // afficher les résultats de la recherche
-    console.log('Résultat de la recherche : ', this.resultat);
+    //console.log('Résultat de la recherche : ', this.resultat);
   }
 
   creationRestaurants(): Observable<HTMLElement[]> {
@@ -86,7 +86,7 @@ export class ApiService {
     return this.httpCLient.get(`${this.REST_API_Res}`).pipe(map((data: Object) => {
       let items:any[] = data as any[]
       let elements:HTMLElement[] = Array(items.length);
-      //console.log(items)
+      //////console.log(items)
       for(let i = 0; i < items.length; i++) {
         const item = items[i];
 
@@ -173,6 +173,6 @@ export class ApiService {
       this.tFiltres.push(nomFiltre);
     }
     this.search([""]);
-    console.log(this.tFiltres);
+    //console.log(this.tFiltres);
   }
 }

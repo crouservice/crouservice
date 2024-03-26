@@ -84,7 +84,7 @@ export class MapComponent implements OnInit {
 
 
 //    this.listeHebergement.forEach((location: Location) => {
-//      console.log(location);
+//      //console.log(location);
 //      leaf.marker([location["localisation"]["lat"], location["localisation"]["lng"]], {icon: hebergementIcon}).addTo(hebergement).bindPopup(location["label"]);
 //    });
 /*    this.api.GetLocalisation()
