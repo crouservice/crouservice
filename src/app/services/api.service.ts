@@ -21,8 +21,7 @@ export class ApiService {
    }
   Liste:any =[{"trie":"test"}];
 
-  
-  
+  /* Fonction qui appelle l'API pour les filtres */
   GetTrie(){
     this.httpCLient.get(`${this.REST_API_liste_Trie}`).subscribe(res =>{
       this.Liste=res;
@@ -30,6 +29,9 @@ export class ApiService {
     return true
   }
 
+  /* Fonction qui récupère les mots de la barre de recherche et 
+   * les filtres pour créer les logements et restaurants correspondant aux mots
+   */
   search(searchTerms: string[]) {
     this.resultat =[""];
     var donnees = this.Liste.trie
@@ -61,6 +63,7 @@ export class ApiService {
     this.REST_API_Res = "http://127.0.0.1:3080/restaurant";
     this.REST_API_Log = "http://127.0.0.1:3080/logement";
 
+    // Créé les restaurants en fonction des filtres
     this.creationRestaurants().subscribe((elements: HTMLElement[]) => {
       for (const el of elements) {
         if (el != undefined) {
@@ -69,6 +72,7 @@ export class ApiService {
       }
     })
 
+    // Créé les logements en fonction des filtres
     this.creationLogements().subscribe((elements: HTMLElement[]) => {
       for (const el of elements) {
         if (el != undefined) {
@@ -81,12 +85,14 @@ export class ApiService {
     //console.log('Résultat de la recherche : ', this.resultat);
   }
 
+  /* Fonction qui créé les éléments div de la barre verticale 
+   * avec les restaurants correspondant aux mots recherchés
+   */
   creationRestaurants(): Observable<HTMLElement[]> {
     this.REST_API_Res = this.REST_API_Res + '/{"trie":' + JSON.stringify(this.resultat) + '}';
     return this.httpCLient.get(`${this.REST_API_Res}`).pipe(map((data: Object) => {
       let items:any[] = data as any[]
       let elements:HTMLElement[] = Array(items.length);
-      //////console.log(items)
       for(let i = 0; i < items.length; i++) {
         const item = items[i];
 
@@ -115,6 +121,9 @@ export class ApiService {
     }))
   }
 
+  /* Fonction qui créé les éléments div de la barre verticale 
+   * avec les logements correspondant aux mots recherchés
+   */
   creationLogements(): Observable<HTMLElement[]> {
     this.REST_API_Log = this.REST_API_Log + '/{"trie":' + JSON.stringify(this.resultat) + '}';
     return this.httpCLient.get(`${this.REST_API_Log}`).pipe(map((data: Object) => {
@@ -164,6 +173,9 @@ export class ApiService {
     }))
   }
 
+  /* Fonction qui ajoute ou retire les filtres 
+   * sélectionnés du tableau tFiltres
+   */
   filtres(nomFiltre: string): void {
     if (this.tFiltres.includes(nomFiltre) == true){
       let index = this.tFiltres.indexOf(nomFiltre);
@@ -173,6 +185,5 @@ export class ApiService {
       this.tFiltres.push(nomFiltre);
     }
     this.search([""]);
-    //console.log(this.tFiltres);
   }
 }
