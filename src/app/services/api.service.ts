@@ -13,7 +13,7 @@ export class ApiService {
 
   REST_API_Res : string ="http://127.0.0.1:3080/restaurant"
   REST_API_Log : string ="http://127.0.0.1:3080/logement"
-  REST_API_liste_Trie :string ="http://127.0.0.1:3080/trie"
+  REST_API_liste_Trie :string ="http://127.0.0.1:3080/tri"
   
   constructor(private httpCLient : HttpClient) {
     this.GetTrie()
