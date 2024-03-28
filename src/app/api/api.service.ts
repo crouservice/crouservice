@@ -2,21 +2,20 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {LatLngBounds} from "leaflet";
 import {concat, Observable} from "rxjs";
+// @ts-ignore
+import * as config from "../../../config.json";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-
-  REST_API: string = "http://127.0.0.1:3080"
+  REST_API: string = `http://${config.api.host || '127.0.0.1'}:${config.api.port || '3080'}`
   trisActifs: any = null;
   trisPossible: any = [];
 
   constructor(private httpClient: HttpClient) {
     this.httpClient.get(`${this.REST_API}/tri`).subscribe(res =>{
-      console.log(res);
       this.trisPossible = (res as any)["trie"];
-      console.log(this.trisPossible);
     });
   }
 
@@ -25,11 +24,7 @@ export class ApiService {
    * @param bounds Position de la carte
    */
   getLogements(bounds: LatLngBounds | null) {
-    return this.httpClient.get(`${this.REST_API}/logement${bounds != null ? `/
-${bounds.getNorthWest().lat}/
-${bounds.getNorthWest().lng}/
-${bounds.getSouthEast().lat}/
-${bounds.getSouthEast().lng}` : ''}${this.trisActifs != null ? `/{"trie":${JSON.stringify(this.trisActifs.join(','))}}` : ''}`);
+    return this.httpClient.get(`${this.REST_API}/logement${bounds != null ? `/${bounds.getNorthWest().lat}/${bounds.getNorthWest().lng}/${bounds.getSouthEast().lat}/${bounds.getSouthEast().lng}` : ''}${this.trisActifs != null ? `/{"trie":${JSON.stringify(this.trisActifs.join(','))}}` : ''}`);
   }
 
   /**
@@ -37,11 +32,7 @@ ${bounds.getSouthEast().lng}` : ''}${this.trisActifs != null ? `/{"trie":${JSON.
    * @param bounds Position de la carte
    */
   getRestaurants(bounds: LatLngBounds | null) {
-    return this.httpClient.get(`${this.REST_API}/restaurant${bounds != null ? `/
-${bounds.getNorthWest().lat}/
-${bounds.getNorthWest().lng}/
-${bounds.getSouthEast().lat}/
-${bounds.getSouthEast().lng}` : ''}${this.trisActifs != null ? `/{"trie":${JSON.stringify(this.trisActifs.join(','))}}` : ''}`);
+    return this.httpClient.get(`${this.REST_API}/restaurant${bounds != null ? `/${bounds.getNorthWest().lat}/${bounds.getNorthWest().lng}/${bounds.getSouthEast().lat}/${bounds.getSouthEast().lng}` : ''}${this.trisActifs != null ? `/{"trie":${JSON.stringify(this.trisActifs.join(','))}}` : ''}`);
   }
 
   /**
