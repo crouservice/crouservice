@@ -12,6 +12,10 @@ export class SearchComponent {
   constructor(private api: ApiService, private event: EvenementService) {
   }
 
+  /**
+   * Recherche d'un terme
+   * @param e Event de la recherche
+   */
   search(e: Event): void {
     e.preventDefault();
     e.stopPropagation();
