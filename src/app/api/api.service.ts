@@ -24,7 +24,7 @@ export class ApiService {
    * @param bounds Position de la carte
    */
   getLogements(bounds: LatLngBounds | null) {
-    return this.httpClient.get(`${this.REST_API}/logement${bounds != null ? `/${bounds.getNorthWest().lat}/${bounds.getNorthWest().lng}/${bounds.getSouthEast().lat}/${bounds.getSouthEast().lng}` : ''}${this.trisActifs != null ? `/{"trie":${JSON.stringify(this.trisActifs.join(','))}}` : ''}`);
+    return this.httpClient.get(`${this.REST_API}/logement${bounds != null ? `/${bounds.getNorthWest().lat}/${bounds.getNorthWest().lng}/${bounds.getSouthEast().lat}/${bounds.getSouthEast().lng}` : ''}${this.trisActifs != null ? `/{"trie":${JSON.stringify(this.trisActifs)}}` : ''}`);
   }
 
   /**
@@ -32,7 +32,7 @@ export class ApiService {
    * @param bounds Position de la carte
    */
   getRestaurants(bounds: LatLngBounds | null) {
-    return this.httpClient.get(`${this.REST_API}/restaurant${bounds != null ? `/${bounds.getNorthWest().lat}/${bounds.getNorthWest().lng}/${bounds.getSouthEast().lat}/${bounds.getSouthEast().lng}` : ''}${this.trisActifs != null ? `/{"trie":${JSON.stringify(this.trisActifs.join(','))}}` : ''}`);
+    return this.httpClient.get(`${this.REST_API}/restaurant${bounds != null ? `/${bounds.getNorthWest().lat}/${bounds.getNorthWest().lng}/${bounds.getSouthEast().lat}/${bounds.getSouthEast().lng}` : ''}${this.trisActifs != null ? `/{"trie":${JSON.stringify(this.trisActifs)}}` : ''}`);
   }
 
   /**
