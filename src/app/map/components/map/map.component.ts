@@ -103,6 +103,12 @@ export class MapComponent implements OnInit {
     });
   }
 
+  /**
+   * Mise à jour des lieux
+   * @param event Evenement
+   * @param api API
+   * @param map Carte
+   */
   updateLocation(event: EvenementService, api: ApiService, map: leaf.Map): void {
     const bounds = map.getBounds();
     event.majLocation(bounds);
@@ -126,6 +132,9 @@ export class MapComponent implements OnInit {
     });
   }
 
+  /**
+   * Mise à jour des filtres
+   */
   updateFilter(): void {
   }
 }
