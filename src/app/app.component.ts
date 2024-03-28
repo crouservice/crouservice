@@ -1,17 +1,19 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {MapModule} from "./map.module/map.module";
-import { SearchComponent } from './search/search.component';
-import { BarreVertComponent } from './barre-vert/barre-vert.component';
+import { MapModule } from "./map/map.module";
+import {SearchModule} from "./search/search.module";
+import {ResultatModule} from "./resultat/resultat.module";
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: 
+  imports: [
     RouterOutlet,
     MapModule,
-    SearchComponent, 
-    BarreVertComponent
+    SearchModule,
+    ResultatModule,
+    // CommunicationModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
