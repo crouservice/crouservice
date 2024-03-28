@@ -20,6 +20,10 @@ export class ApiService {
     });
   }
 
+  /**
+   * Fonction qui récupère les logements
+   * @param bounds Position de la carte
+   */
   getLogements(bounds: LatLngBounds | null) {
     return this.httpClient.get(`${this.REST_API}/logement${bounds != null ? `/
 ${bounds.getNorthWest().lat}/
@@ -28,6 +32,10 @@ ${bounds.getSouthEast().lat}/
 ${bounds.getSouthEast().lng}` : ''}${this.trisActifs != null ? `/{"trie":${JSON.stringify(this.trisActifs.join(','))}}` : ''}`);
   }
 
+  /**
+   * Fonction qui récupère les restaurants
+   * @param bounds Position de la carte
+   */
   getRestaurants(bounds: LatLngBounds | null) {
     return this.httpClient.get(`${this.REST_API}/restaurant${bounds != null ? `/
 ${bounds.getNorthWest().lat}/
@@ -36,11 +44,19 @@ ${bounds.getSouthEast().lat}/
 ${bounds.getSouthEast().lng}` : ''}${this.trisActifs != null ? `/{"trie":${JSON.stringify(this.trisActifs.join(','))}}` : ''}`);
   }
 
+  /**
+   * Fonction qui récupère les universités
+   */
   getUniversites() {
     return this.httpClient.get(`${this.REST_API}/etablissement`);
   }
 
 
+  /**
+   * Fonction qui récupère les mots de la barre de recherche et les filtres pour créer les logements et restaurants correspondant aux mots
+   * @param searchTerms Mots de la barre de recherche
+   * @param bound Position de la carte
+   */
   search(searchTerms: string[], bound: LatLngBounds | null) {
     let donnees = this.trisPossible
     let resultat: string[] | null = [];
@@ -60,42 +76,13 @@ ${bounds.getSouthEast().lng}` : ''}${this.trisActifs != null ? `/{"trie":${JSON.
     }
     this.trisActifs = resultat;
     return concat(this.getLogements(bound), this.getRestaurants(bound));
-
-    // Supprime tous les items de la barre verticale
-    // var place = document.getElementById("placeItems");
-
-    // if ( place) {
-      // Sélectionnez tous les éléments div enfants
-      // var childDivs =  place.querySelectorAll("div");
-
-      // Parcourez chaque élément div enfant et supprimez-le
-      // childDivs.forEach(function(child) {
-      //   child.remove();
-      // });
-    // }
-
-    // Créé les restaurants en fonction des filtres
-    // this.creationRestaurants(bound).subscribe((elements: HTMLElement[]) => {
-    //   for (const el of elements) {
-    //     if (el != undefined) {
-    //       place?.appendChild(el);
-    //     }
-    //   }
-    // })
-
-    // Créé les logements en fonction des filtres
-    // this.creationLogements().subscribe((elements: HTMLElement[]) => {
-    //   for (const el of elements) {
-    //     if (el != undefined) {
-    //       place?.appendChild(el);
-    //     }
-    //   }
-    // })
-
-    // afficher les résultats de la recherche
-    //console.log('Résultat de la recherche : ', this.resultat);
   }
 
+  /**
+   * Mise à jour de la zone de recherche
+   * @param nomFiltre Nom du filtre
+   * @param dim Posittion de la carte
+   */
   filtres(nomFiltre: string, dim: LatLngBounds | null) {
     if (this.trisActifs == null) {
       this.trisActifs = [];
