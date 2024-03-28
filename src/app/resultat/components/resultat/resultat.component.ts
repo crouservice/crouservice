@@ -48,14 +48,6 @@ interface Restaurant {
   photo: string;
 }
 
-interface Universite {
-  uo_lib: string;
-  coordonnees: {
-    lat: number;
-    lon: number;
-  };
-}
-
 @Component({
   selector: 'app-resultat',
   standalone: false,
@@ -95,11 +87,20 @@ export class ResultatComponent implements OnInit {
     }
   }
 
+  /**
+   * Mise à jour de la zone de recherche
+   * @param nomFiltre Nom du filtre
+   */
   filtres(nomFiltre: string): void {
     this.service.filtres(nomFiltre, this.dim);
     this.event.majFiltre();
   }
 
+  /**
+   * Création des éléments restaurants
+   * @param place Element parent
+   * @param service Service API
+   */
   creationRestaurants(place: HTMLElement | null, service: ApiService): void {
     if (place == null) {
       return;
@@ -142,6 +143,11 @@ export class ResultatComponent implements OnInit {
     })
   }
 
+  /**
+   * Création des éléments logements
+   * @param place Element parent
+   * @param service Service API
+   */
   creationLogements(place: HTMLElement | null, service: ApiService): void {
     if (place == null) {
       return;
