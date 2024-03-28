@@ -9,7 +9,7 @@ import * as config from "../../../config.json";
   providedIn: 'root'
 })
 export class ApiService {
-  REST_API: string = `http://${config.api.host || '127.0.0.1'}:${config.api.port || '3080'}`
+  REST_API: string = `${config.api.protocol || 'http'}://${config.api.host || '127.0.0.1'}:${config.api.port || '3080'}`
   trisActifs: any = null;
   trisPossible: any = [];
 
